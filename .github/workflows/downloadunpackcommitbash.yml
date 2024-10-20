@@ -1,0 +1,54 @@
+# This is a basic workflow to help you get started with Actions
+
+name: DownloadUnpackCommitBash
+run-name: VersionControlIntegration-Bash
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      artifact_url:
+        description: "The URL of the Dataverse record ID for the artifact created by the pipelines."
+        required: true
+      solution_name:
+        description: "Name of the solution in Dataverse"
+        required: true
+      user_name:
+        description: "User name for the commit"
+        required: true
+      user_email:
+        description: "User name email address"
+        required: true
+      source_branch:
+        description: "Branch for the solution commit"
+        default: "main"
+        required: true
+      target_branch:
+        description: "Branch to create for the solution"
+        required: false
+      commit_message:
+        description: "Message to provide for the commit"
+        default: "test without Dataverse trigger"
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
